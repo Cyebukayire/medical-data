@@ -2,31 +2,88 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 100vh;
   }
   
   .container .form-container{
-      width: 40%;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 2%;
+    margin: 2%;
+    width: 100%;
+    border-radius: 5px;
+    border-top: 10px solid #f3c228;
   }
   
   .container .form-container h1{
       text-align: center;
       font-size: 2.5em;
       font-weight: bolder;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
   
   .container .form-container input{
      width: 100%;
-     padding: 20px;
+     padding: 10px;
      border: 1px solid silver;
-     border-radius: 10px;
+     border-radius: 2px;
      margin-top: 2em;
+     font-size: 16px;
+  }
+
+  .container .form-container .names{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+  }
+
+  .container .form-container .names input{
+    width: 46%;
+  }
+
+  .container .form-container .gender{
+    display: flex;
+    flex-direction: row;
+    
+    width: 100%;
+    /* justify-content: space-between; */
+    /* flex-wrap: wrap; */
+  }
+
+  .container .form-container .gender .genderOption{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-right: 20px;
+    /* width: 100%; */
+  }
+  .container .form-container .gender .genderOption label{
+    color: black;
+    /* margin-top: 100%; */
+    margin-left: 5px;
+  }
+  .container .form-container .gender .genderOption .label1{
+    margin-top: 75%;
+  }
+  .container .form-container .gender .genderOption .label2{
+    margin-top: 57%;
+  }
+
+  .container .form-container select{
+     width: 100%;
+     padding: 10px;
+     padding-left: 20px;
+     border: 1px solid silver;
+     border-radius: 2px;
+     margin-top: 2em;
+     font-size: 16px;
   }
   
   .container .form-container button{
       width: 100%;
-      padding: 20px;
-      background-color: black;
+      padding: 10px;
+      background-color: #f3c228;
       color: white;
       cursor: pointer;
       border-radius: 10px;

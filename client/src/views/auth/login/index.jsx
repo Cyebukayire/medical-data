@@ -11,12 +11,12 @@ const [requestError, setRequestError] = useState(false);
 const navigate = useNavigate();
 
   const initialValues = {
-    email: '',
+    username: '',
     password: '',
   }
 
   const schema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    username: Yup.string().required("username is required"),
     password: Yup.string().required("Password is required")
   })
 
@@ -30,11 +30,12 @@ const navigate = useNavigate();
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setRequestError(false);
-    const response = await login(values);
-    if(!response?.success) return setRequestError(response?.message || "Something went wrong");
-    localStorage.setItem('token', response.data.token);
-    toast.success("Logged in successfully");
+    console.log(values)
+    // setRequestError(false);
+    // const response = await login(values);
+    // if(!response?.success) return setRequestError(response?.message || "Something went wrong");
+    // localStorage.setItem('token', response.data.token);
+    // toast.success("Logged in successfully");
     navigate('/votes');
   }
   const errorInputStyle = {
@@ -47,21 +48,21 @@ const navigate = useNavigate();
       <div className='form-container'>
         <form>
           {requestError && <div className='error-message'>{requestError}</div>}
-          <h1>Login </h1>
-          <input name='email' type='email' placeholder="email" 
-            {...getFieldProps('email')}
-            style={errors.email && touched.email ? errorInputStyle : {}}
+          <h1>Responsive Login Form</h1>
+          <input name='username' type='text' placeholder="Username" 
+            {...getFieldProps('username')}
+            style={errors.username && touched.username ? errorInputStyle : {}}
           />
-          { touched.email && errors.email && <label>{errors.email}</label>}
-          <input name='password' type='password' placeholder="password" 
+          { touched.username && errors.username && <label>{errors.username}</label>}
+          <input name='password' type='password' placeholder="Password" 
           {...getFieldProps('password')}
           style={errors.password && touched.password ? errorInputStyle : {}}
           />
           { touched.password && errors.password && <label>{errors.password}</label>}
           <button
           type='submit'
-          disabled={!isValid || Object.values(touched).every(e => e === '')}
-          style={!isValid || Object.values(touched).every(e => e === '') ? { backgroundColor: '#ccc'} : {}}
+          // disabled={!isValid || Object.values(touched).every(e => e === '')}
+          // style={!isValid || Object.values(touched).every(e => e === '') ? { backgroundColor: '#ccc'} : {}}
           onClick={handleSubmit}
           >LOGIN</button>
         </form>

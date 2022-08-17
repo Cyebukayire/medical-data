@@ -57,7 +57,7 @@ const errorInputStyle = {
         <form>
           <Toaster/>
           {requestError && <div className='error-message'>{requestError}</div>}
-          <h1>Sign up </h1>
+          <h1>Responsive Registration Form</h1>
           {/* Username */}
           <input name='username' type="text" placeholder="Username"
           {...getFieldProps('username')}
@@ -71,7 +71,7 @@ const errorInputStyle = {
           style={ errors.password && touched.password ? errorInputStyle : {}}
           />
           { touched.password && errors.password && <label>{errors.password}</label>}
-          
+          <div className='names'>
           {/* Names */}
           <input name='firstname' type="text" placeholder="First Name" 
           {...getFieldProps('firstname')}
@@ -84,7 +84,7 @@ const errorInputStyle = {
           style={errors.lastname && touched.lastname ? errorInputStyle: {}}
           />
           { touched.lastname && errors.lastname && <label>{errors.lastname}</label>}
-
+          </div>
           {/* Phone Number */}
           <input name='phone' type="text" placeholder="Phone Number" 
           {...getFieldProps('phone')}
@@ -100,32 +100,36 @@ const errorInputStyle = {
           { touched.birthday && errors.birthday&& <label>{errors.birthday}</label>}
           
           {/* Gender */}
-          <input 
-            type="radio" 
-            id="male"
-            name="gender" 
-            value="male" 
-            onChange={e => handleRadioButtons(e)}
-            required
-          />
-          <label htmlFor="male">Male</label>
-          <br />
+          <div className='gender'>
+            <div className='genderOption'>
+              <input 
+                type="radio" 
+                id="male"
+                name="gender" 
+                value="male" 
+                onChange={e => handleRadioButtons(e)}
+                required
+              />
+              <label className='label1' htmlFor="male">Male</label>
+            </div>
 
-          <input 
-            type="radio" 
-            id="female"
-            name="gender" 
-            value="female" 
-            onChange={e => handleRadioButtons(e)}
-          />
-          <label htmlFor="two">Female</label>
-
+            <div className='genderOption'>
+              <input 
+                type="radio" 
+                id="female"
+                name="gender" 
+                value="female" 
+                onChange={e => handleRadioButtons(e)}
+              />
+              <label className='label2' htmlFor="two">Female</label>
+            </div>
+          </div>
           {/* Roles */}
           <select 
           {...getFieldProps('role')}
           style={errors.role && touched.role? errorInputStyle: {}}
           >
-            <option>Choose Role</option>
+            <option>Select Role</option>
             <option>Admin</option>
             <option>Patient</option>
             <option>Physician</option>
@@ -138,10 +142,10 @@ const errorInputStyle = {
           // disabled={!isValid || Object.values(touched).every(e => e === '')}
           // style={ !isValid || Object.values(touched).every(e => e === '') ? {backgroundColor: '#ccc'} : {}}
           onClick = {handleSubmit}
-          >Signup</button>
+          >Register</button>
 
           <Link to='/'>
-              <p style={{marginTop: '2em'}}>Have account ? <span>Login</span></p>
+              <p style={{marginTop: '2em'}}>Have account already? <span>Login</span></p>
           </Link>
         </form>
       </div>
