@@ -15,9 +15,9 @@ const initialValues = {
   firstname:"",
   lastname:"",
   phone:"",
-  birthDay:"",
-  // gender:"",
-  // role:"",
+  birthday:"",
+  gender:"",
+  role:"",
 }
 
 const schema = Yup.object().shape({
@@ -26,7 +26,9 @@ const schema = Yup.object().shape({
   firstname: Yup.string().required("Enter valid name").max(25).min(5),
   lastname: Yup.string().required("Enter valid name").max(25).min(5),
   phone: Yup.number().required("Enter valid phone number"),
-  birthDay: Yup.date().required("Enter valid birth day")
+  birthday: Yup.date().required("Enter valid birth day"),
+  gender: Yup.string().required("Choose gender"),
+  role: Yup.string().required("Select role")
 })
 
 const formik = useFormik({
@@ -35,6 +37,7 @@ const formik = useFormik({
 })
 
 const { handleChange, values, errors, touched, getFieldProps, isValid  } = formik
+const handleRadioButtons = e => formik.values.gender= e.target.value
 const handleSubmit = async (e) => {
   e.preventDefault();
   console.log(values)
@@ -90,16 +93,50 @@ const errorInputStyle = {
           { touched.phone && errors.phone && <label>{errors.phone}</label>}
 
           {/* Birth Day */}
-          <input name='birthDay' type="date" required
-          {...getFieldProps('birthDay')}
-          style={errors.birthDay && touched.birthDay ? errorInputStyle: {}}
-          />
-          { touched.birthDay && errors.birthDay&& <label>{errors.birthDay}</label>}
+          <input name='birthday' type="date" required
+          {...getFieldProps('birthday')}
+          style={errors.birthday && touched.birthday ? errorInputStyle: {}}
+          /><br/>
+          { touched.birthday && errors.birthday&& <label>{errors.birthday}</label>}
           
+          {/* Gender */}
+          <input 
+            type="radio" 
+            id="male"
+            name="gender" 
+            value="male" 
+            onChange={e => handleRadioButtons(e)}
+            required
+          />
+          <label htmlFor="male">Male</label>
+          <br />
+
+          <input 
+            type="radio" 
+            id="female"
+            name="gender" 
+            value="female" 
+            onChange={e => handleRadioButtons(e)}
+          />
+          <label htmlFor="two">Female</label>
+
+          {/* Roles */}
+          <select 
+          {...getFieldProps('role')}
+          style={errors.role && touched.role? errorInputStyle: {}}
+          >
+            <option>Choose Role</option>
+            <option>Admin</option>
+            <option>Patient</option>
+            <option>Physician</option>
+            <option>Pharmacists</option>
+          </select>
+
+          { touched.role && errors.role&& <label>{errors.role}</label>}
           <button 
           type='submit' 
-          disabled={!isValid || Object.values(touched).every(e => e === '')}
-          style={ !isValid || Object.values(touched).every(e => e === '') ? {backgroundColor: '#ccc'} : {}}
+          // disabled={!isValid || Object.values(touched).every(e => e === '')}
+          // style={ !isValid || Object.values(touched).every(e => e === '') ? {backgroundColor: '#ccc'} : {}}
           onClick = {handleSubmit}
           >Signup</button>
 
