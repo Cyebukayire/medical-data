@@ -1,44 +1,50 @@
-import { useState } from 'react'
-import logo from './logo.svg'
 import './App.css'
+import Login from './views/auth/login'
+import { 
+  Routes,
+  BrowserRouter as Router,
+  Route,
+  Navigate
+} from 'react-router-dom';
+import SignUp from './views/auth/signup';
+import Votes from './views/dashboard/votes';
+import UploadCandidate from './views/dashboard/uploadCandidate';
+import MyVotes from './views/dashboard/myVotes/myVotes';
+import { getProfile } from './services/auth';
 
+const PrivateRoute = ({children}) => {
+  const token = localStorage.getItem('token');
+  if(!token){
+    return <Navigate to='/'/>
+  }
+  return children;
+}
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+   <Router>
+     <Routes>
+       {/* auth routes */}
+       <Route path="/" element={<Login />} />
+       <Route path='/signup' element={<SignUp />} />
+
+       {/* dashboard routes  */}
+      <Route path='/votes' element={
+      <PrivateRoute>
+        <Votes />
+      </PrivateRoute>
+      } />
+      <Route path='/uploadCandidate' element={
+        <PrivateRoute>
+        <UploadCandidate />
+        </PrivateRoute>
+      } />
+      <Route path='/myVotes' element={
+        <PrivateRoute>
+        <MyVotes />
+        </PrivateRoute>
+      } />
+     </Routes>
+   </Router>
   )
 }
 

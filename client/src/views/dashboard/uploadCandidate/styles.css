@@ -1,0 +1,57 @@
+.upload-candidate-container {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 5px;
+}
+.upload-candidate-form {
+    box-sizing: border-box;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px 0;
+}
+textarea {
+    margin: 15px;
+    width: 300px;
+    height: 150px;
+    border: 3px solid rgba(255, 228, 196, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+textarea:focus {
+    outline: none;
+    border: 5px solid rgba(255, 228, 196, 0.4)
+}
+.candidate-profile-input{
+    display:none
+}
+.upload-candidate-label {
+    cursor: pointer;
+    border: 2px solid rgba(255, 228, 196, 0.4);
+    display: inline-block;
+    padding: 12px 12px;
+    margin: 16px;
+    font-size: 16px;
+    background-color: rgba(255, 228, 196, 0.4);
+    border-radius: 5px;
+}
+
+.submit-candidate {
+    cursor: pointer;
+    border: 2px solid rgba(255, 228, 196, 0.4);
+    display: inline-block;
+    padding: 12px 12px;
+    margin: 16px;
+    font-size: 16px;
+    background-color: rgba(255, 228, 196, 0);
+    border-radius: 5px;
+    font-weight: bolder;
+    color:rgb(255, 140, 0)
+}
