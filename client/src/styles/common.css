@@ -1,3 +1,4 @@
+/* Form */
 .container {
     display: flex;
     justify-content: space-around;
@@ -7,7 +8,7 @@
   .container .form-container{
     background-color: white;
     box-sizing: border-box;
-    padding: 2%;
+    padding: 5%;
     margin: 2%;
     width: 100%;
     border-radius: 5px;
@@ -35,7 +36,6 @@
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
-    /* flex-wrap: wrap; */
   }
 
   .container .form-container .names input{
@@ -45,10 +45,7 @@
   .container .form-container .gender{
     display: flex;
     flex-direction: row;
-    
     width: 100%;
-    /* justify-content: space-between; */
-    /* flex-wrap: wrap; */
   }
 
   .container .form-container .gender .genderOption{
@@ -67,7 +64,7 @@
     margin-top: 75%;
   }
   .container .form-container .gender .genderOption .label2{
-    margin-top: 57%;
+    margin-top: 56%;
   }
 
   .container .form-container select{
@@ -79,7 +76,24 @@
      margin-top: 2em;
      font-size: 16px;
   }
-  
+
+  /* Terms and Conditions */
+  .conditions {
+    display: flex;
+    flex-direction: column;
+  }
+  .conditions div{
+    display: flex;
+    flex-direction: row;
+  }
+  .conditions input {
+    margin-left: -43%;
+  }
+  .conditions label{
+    margin-left: -46%;
+    color: black;
+    margin-top: 6%;
+  }
   .container .form-container button{
       width: 100%;
       padding: 10px;
@@ -111,3 +125,5 @@
     padding: 5px;
     border-radius: 5px;
 }
+
+/* Login Form */

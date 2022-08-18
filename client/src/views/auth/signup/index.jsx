@@ -38,6 +38,12 @@ const formik = useFormik({
 
 const { handleChange, values, errors, touched, getFieldProps, isValid  } = formik
 const handleRadioButtons = e => formik.values.gender= e.target.value
+const [isChecked, setIsChecked] = useState(false)
+
+const handleAgreeToTerms = ()=>{
+  console.log(isChecked)
+  setIsChecked(!isChecked);
+}
 const handleSubmit = async (e) => {
   e.preventDefault();
   console.log(values)
@@ -66,7 +72,7 @@ const errorInputStyle = {
           { touched.username && errors.username && <label>{errors.username}</label>}
 
           {/* Password */}
-          <input name='password' type="password" placeholder="password" 
+          <input name='password' type="password" placeholder="Password" 
           {...getFieldProps('password')}
           style={ errors.password && touched.password ? errorInputStyle : {}}
           />
@@ -135,15 +141,30 @@ const errorInputStyle = {
             <option>Physician</option>
             <option>Pharmacists</option>
           </select>
-
           { touched.role && errors.role&& <label>{errors.role}</label>}
+
+          {/* Conditions */}
+          <div className="conditions">
+            <div>
+              <input type="checkbox" onChange={handleAgreeToTerms}/>
+              <label htmlFor="terms"> I agree with terms and conditions</label>
+            </div>
+            <div>
+              <input type="checkbox" id="newsletter"/>
+              <label htmlFor="newsletter"> I want to receive newsletter </label>
+            </div>
+          </div>
+
+          {/* Submit */}
           <button 
           type='submit' 
+          disabled={!isChecked}
           // disabled={!isValid || Object.values(touched).every(e => e === '')}
-          // style={ !isValid || Object.values(touched).every(e => e === '') ? {backgroundColor: '#ccc'} : {}}
+          // style={ !isChecked || Object.values(touched).every(e => e === '') ? {backgroundColor: '#ccc'} : {}}
           onClick = {handleSubmit}
           >Register</button>
 
+          
           <Link to='/'>
               <p style={{marginTop: '2em'}}>Have account already? <span>Login</span></p>
           </Link>

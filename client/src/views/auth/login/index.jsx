@@ -36,7 +36,7 @@ const navigate = useNavigate();
     // if(!response?.success) return setRequestError(response?.message || "Something went wrong");
     // localStorage.setItem('token', response.data.token);
     // toast.success("Logged in successfully");
-    navigate('/votes');
+    // navigate('/data');
   }
   const errorInputStyle = {
     border: '1px solid red'
@@ -59,6 +59,7 @@ const navigate = useNavigate();
           style={errors.password && touched.password ? errorInputStyle : {}}
           />
           { touched.password && errors.password && <label>{errors.password}</label>}
+
           <button
           type='submit'
           // disabled={!isValid || Object.values(touched).every(e => e === '')}
