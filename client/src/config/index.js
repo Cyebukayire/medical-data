@@ -1,1 +1,2 @@
-export const API_URL = 'http://localhost:5000/api/v1'
+export const SERVER1_API_URL = 'http://localhost:8080/DC'
+export const SERVER2_API_URL = "http://localhost:9000/api/v1";

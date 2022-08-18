@@ -45,8 +45,8 @@ const handleAgreeToTerms = ()=>{
   setIsChecked(!isChecked);
 }
 const handleSubmit = async (e) => {
-  e.preventDefault();
-  console.log(values)
+  // e.preventDefault();
+  // console.log(values)
   // const response = await register(values);
   // if(!response?.success) {
   //   return setRequestError(response.message || "Something went wrong");
@@ -157,12 +157,7 @@ const errorInputStyle = {
 
           {/* Submit */}
           <button 
-          type='submit' 
-          disabled={!isChecked}
-          // disabled={!isValid || Object.values(touched).every(e => e === '')}
-          // style={ !isChecked || Object.values(touched).every(e => e === '') ? {backgroundColor: '#ccc'} : {}}
-          onClick = {handleSubmit}
-          >Register</button>
+          type='submit' disabled={!isChecked} onClick = {handleSubmit}>Register</button>
 
           
           <Link to='/'>

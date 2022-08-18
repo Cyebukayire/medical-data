@@ -30,7 +30,6 @@ const navigate = useNavigate();
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values)
     // setRequestError(false);
     // const response = await login(values);
     // if(!response?.success) return setRequestError(response?.message || "Something went wrong");
@@ -60,12 +59,7 @@ const navigate = useNavigate();
           />
           { touched.password && errors.password && <label>{errors.password}</label>}
 
-          <button
-          type='submit'
-          // disabled={!isValid || Object.values(touched).every(e => e === '')}
-          // style={!isValid || Object.values(touched).every(e => e === '') ? { backgroundColor: '#ccc'} : {}}
-          onClick={handleSubmit}
-          >LOGIN</button>
+          <button type='submit' onClick={handleSubmit}>LOGIN</button>
         </form>
 
         <Link to='/signup'>
