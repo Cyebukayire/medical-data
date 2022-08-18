@@ -30,12 +30,12 @@ const navigate = useNavigate();
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setRequestError(false);
-    // const response = await login(values);
+    setRequestError(false);
+    const response = await login(values);
     // if(!response?.success) return setRequestError(response?.message || "Something went wrong");
     // localStorage.setItem('token', response.data.token);
     // toast.success("Logged in successfully");
-    // navigate('/data');
+    navigate('/data', response);
   }
   const errorInputStyle = {
     border: '1px solid red'
