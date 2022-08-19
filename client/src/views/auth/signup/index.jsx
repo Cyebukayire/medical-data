@@ -41,17 +41,20 @@ const handleRadioButtons = e => formik.values.gender= e.target.value
 const [isChecked, setIsChecked] = useState(false)
 
 const handleAgreeToTerms = ()=>{
-  console.log(isChecked)
   setIsChecked(!isChecked);
 }
+
 const handleSubmit = async (e) => {
-  // e.preventDefault();
-  // console.log(values)
-  // const response = await register(values);
-  // if(!response?.success) {
-  //   return setRequestError(response.message || "Something went wrong");
-  // }
-  // toast.success("Account created successfully");
+  e.preventDefault();
+  console.log(values)
+  const message = await register(values);
+  if(message.includes('successfully')){
+    console.log("It worked! MESSAGE: ", message)
+    toast.success("Account created successfully");
+    Navigate('/login')
+  }else{
+    return setRequestError(message);
+  }
 }
 
 const errorInputStyle = {

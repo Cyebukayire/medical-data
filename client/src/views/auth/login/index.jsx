@@ -31,11 +31,17 @@ const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setRequestError(false);
-    const response = await login(values);
-    // if(!response?.success) return setRequestError(response?.message || "Something went wrong");
-    // localStorage.setItem('token', response.data.token);
-    // toast.success("Logged in successfully");
-    navigate('/data', response);
+    // const message = await login(values);
+    const message = "Logged in successfully";
+    if(message.includes('successfully')){
+      console.log("It worked! MESSAGE: ", message)
+      localStorage.setItem("usertype", "admin")
+      toast.success(message);
+      navigate("/data")
+      // return <Navigate to='/data'/>
+    }else{
+      return setRequestError(message);
+    }
   }
   const errorInputStyle = {
     border: '1px solid red'

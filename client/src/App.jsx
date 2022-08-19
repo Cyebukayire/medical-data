@@ -8,13 +8,15 @@ import {
 import SignUp from './views/auth/signup';
 import Login from './views/auth/login';
 
+import DataTable from './views/data';
 const PrivateRoute = ({children}) => {
-  const token = localStorage.getItem('token');
-  if(!token){
+  const usertype = localStorage.getItem('usertype');
+  if(!usertype){
     return <Navigate to='/'/>
   }
   return children;
 }
+
 function App() {
   return (
    <Router>
@@ -22,13 +24,12 @@ function App() {
        {/* auth routes */}
        <Route path="/" element={<Login />} />
        <Route path='/signup' element={<SignUp />} />
-
        {/* protected routes  */}
-      {/* <Route path='/votes' element={
+      <Route path='/data' element={
       <PrivateRoute>
-        <Votes />
+        <DataTable />
       </PrivateRoute>
-      } /> */}
+      } />
      </Routes>
    </Router>
   )
