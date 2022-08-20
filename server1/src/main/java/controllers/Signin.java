@@ -46,24 +46,27 @@ public class Signin extends HttpServlet {
             throws ServletException, IOException {
         processRequest(req, response);
 
-        response.addHeader("Access-Control-Allow-Origin", "*"); //Allow access from all domains
-        String requestData = req.getReader().lines().collect(Collectors.joining());
-        User fromJson = new Gson().fromJson(requestData, User.class);
+      //Allow access from all domains
+        response.addHeader("Access-Control-Allow-Origin", "*"); 
+        String rawdata = req.getReader().lines().collect(Collectors.joining());
+        User jsondata = new Gson().fromJson(rawdata, User.class);
 
-        LinkedHashMap<Integer, User> mappedUsers = new LinkedHashMap<Integer, User>();
-        mappedUsers = Database.getInstance().getData();
+        LinkedHashMap<Integer, User> users = new LinkedHashMap<Integer, User>();
+        users = Database.getInstance().getData();
 
-        boolean userFound = false;
-        for (User user : usersList(mappedUsers)) {
-            if (user.getUsername().equals(fromJson.getUsername())
-                    && user.getPassword() == fromJson.getPassword()) {
-                userFound = true;
+        boolean exists = false;
+        User authUser = null;
+        for (User user : usersList(users)) {
+            if (user.getUsername().equals(jsondata.getUsername())
+                    && user.getPassword() == jsondata.getPassword()) {
+                exists = true;
+                authUser = user;
                 handleLogin(user.getUsertype().toLowerCase(), user.getUsername(),
                         String.valueOf(user.getPassword()));
             }
         }
 
-        authResponse(response, userFound);
+        authResponse(response, authUser, exists);
 
     }
 
@@ -77,17 +80,16 @@ public class Signin extends HttpServlet {
         return usersList;
     }
 
-    private void authResponse(HttpServletResponse response, boolean userFound) {
+    private void authResponse(HttpServletResponse response, User authUser, boolean userFound) {
         PrintWriter out;
         try {
             out = response.getWriter();
             if (userFound == false) {
                 out.print("Invalid credentials");
             } else {
-//                out.print(Admin.getUsertype());
+                out.print(authUser.getUsertype());
             }
         } catch (Exception e) {
-//            System.out.print(e.getMessage());
             System.out.print("something went wrong");
 
         }

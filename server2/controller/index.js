@@ -1,18 +1,28 @@
-import { medicalInfo } from "../services/data"
+const { data } = require("../services/data");
 
-export const medicalData = (req, res) => {
-    const userType = req.body.userType
-    userType.toLowerCase()
+const Data = (req, res) => {
+  const usertype = req.body.usertype;
+  console.log(data());
+  if (usertype === "admin") {
+    return res.status(200).json({ success: true, data: data() });
+  } else if (usertype === "patient") {
+    return res.send({
+      data: data()["Patient illnesses 2000 - 2002"],
+      title: "Patient illnesses 2000 - 2002",
+    });
+  } else if (usertype === "pharmacist") {
+    return res.send({
+      data: data()["Most bough drugs 2000 - 2002"],
+      title: "Most bough drugs 2000 - 2002",
+    });
+  } else if (usertype === "physician") {
+    return res.send({
+      data: data()["Physicians missions 2000 - 2002"],
+      title: "Physicians missions 2000 - 2002",
+    });
+  } else {
+    console.log("USER TYPE DOES NOT EXIST");
+  }
+};
 
-    if(userType === 'admin'){
-        return res.send({data: medicalInfo()})
-    }else if(userType === 'patient'){
-        return res.send({data: medicalInfo()["Patient illnesses 2000 - 2002"], title: "Patient illnesses 2000 - 2002"})
-    }else if(userType === 'pharmacist'){
-        // pharmacist
-        return res.send({data: medicalInfo()["Most bough drugs 2000 - 2002"], title: "Most bough drugs 2000 - 2002" })
-    }else if( userType === 'physician'){
-        // physician records
-        return res.send({data: medicalInfo()["Physicians missions 2000 - 2002"], title: "Physicians missions 2000 - 2002"})
-    }
-}
+module.exports.Data = Data;

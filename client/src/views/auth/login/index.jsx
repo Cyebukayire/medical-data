@@ -1,79 +1,93 @@
-import { useFormik } from 'formik'
-import 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import '../../../styles/common.css'
+import { useFormik } from "formik";
+import "react";
+import { Link, useNavigate } from "react-router-dom";
+import "../../../styles/common.css";
 import * as Yup from "yup";
-import { login } from '../../../services/auth';
-import { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { login } from "../../../services/auth";
+import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 const Login = () => {
-const [requestError, setRequestError] = useState(false);
-const navigate = useNavigate();
+  const [requestError, setRequestError] = useState(false);
+  const navigate = useNavigate();
 
   const initialValues = {
-    username: '',
-    password: '',
-  }
+    username: "",
+    password: "",
+  };
 
   const schema = Yup.object().shape({
     username: Yup.string().required("username is required"),
-    password: Yup.string().required("Password is required")
-  })
-
+    password: Yup.string().required("Password is required"),
+  });
 
   const formik = useFormik({
     initialValues: initialValues,
-    validationSchema: schema
+    validationSchema: schema,
   });
-  
-  const {handleChange, values, errors, touched, getFieldProps, isValid} = formik
-  
+
+  const { handleChange, values, errors, touched, getFieldProps, isValid } =
+    formik;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setRequestError(false);
-    // const message = await login(values);
-    const message = "Logged in successfully";
-    if(message.includes('successfully')){
-      console.log("It worked! MESSAGE: ", message)
-      localStorage.setItem("usertype", "admin")
-      toast.success(message);
-      navigate("/data")
-      // return <Navigate to='/data'/>
-    }else{
-      return setRequestError(message);
+    // const response = await login(values);
+    const response = "successfully";
+    if (response.includes("successfully")) {
+      // usertype = response.usertype;
+      // usertype.toLowerCase();
+      localStorage.setItem("usertype", "admin");
+      toast.success(response);
+      navigate("/data");
+    } else {
+      return setRequestError(response);
     }
-  }
+  };
   const errorInputStyle = {
-    border: '1px solid red'
-  }
+    border: "1px solid red",
+  };
 
   return (
     <div className="container">
-      <Toaster/>
-      <div className='form-container'>
+      <Toaster />
+      <div className="form-container">
         <form>
-          {requestError && <div className='error-message'>{requestError}</div>}
+          {requestError && <div className="error-message">{requestError}</div>}
           <h1>Responsive Login Form</h1>
-          <input name='username' type='text' placeholder="Username" 
-            {...getFieldProps('username')}
+          <input
+            name="username"
+            type="text"
+            placeholder="Username"
+            {...getFieldProps("username")}
             style={errors.username && touched.username ? errorInputStyle : {}}
           />
-          { touched.username && errors.username && <label>{errors.username}</label>}
-          <input name='password' type='password' placeholder="Password" 
-          {...getFieldProps('password')}
-          style={errors.password && touched.password ? errorInputStyle : {}}
+          {touched.username && errors.username && (
+            <label>{errors.username}</label>
+          )}
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            {...getFieldProps("password")}
+            style={errors.password && touched.password ? errorInputStyle : {}}
           />
-          { touched.password && errors.password && <label>{errors.password}</label>}
+          {touched.password && errors.password && (
+            <label>{errors.password}</label>
+          )}
 
-          <button type='submit' onClick={handleSubmit}>LOGIN</button>
+          <button type="submit" onClick={handleSubmit}>
+            LOGIN
+          </button>
         </form>
 
-        <Link to='/signup'>
-              <p style={{marginTop: '2em'}}>Have no account ? <span>Register</span></p>
-          </Link>
+        <Link to="/signup">
+          <p style={{ marginTop: "2em" }}>
+            Have no account ? <span>Register</span>
+          </p>
+        </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

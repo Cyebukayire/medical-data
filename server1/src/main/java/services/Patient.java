@@ -34,4 +34,5 @@ public class Patient implements UserRepository{
 	public void setUsertype(String usertype) {
 		this.usertype = usertype;
 	}
+    
 }

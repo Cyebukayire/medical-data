@@ -1,11 +1,12 @@
+import "../styles/common.css";
 export function DataItem({ data, title }) {
   console.log("data: ", data);
   return (
-    <div className="info">
+    <div className="data-container">
       {data && (
         <>
-          <h3>{title}</h3>
           <table>
+            <caption>{title}</caption>
             <thead>
               <tr>
                 {Object.keys(data[0]).map((key, index) => (

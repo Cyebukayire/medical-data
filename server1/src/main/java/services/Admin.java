@@ -10,9 +10,12 @@ import repository.UserRepository;
 public class Admin implements UserRepository{
 
 	public String usertype = "";
-	
 	@Override
 	public String login(String username, String password){
+		LinkedHashMap<Integer, User> users = Database.getInstance().getData();
+        for (User user : users.values()) {
+        	if(user.getUsername() == username && user.getPassword() == password) return user.getUsertype();
+        }
 		return null;
 	}
 	@Override
@@ -21,8 +24,7 @@ public class Admin implements UserRepository{
 		user.put(new Random().nextInt(18), admin);
 		return user;
 	}
-	
-
+    
 //	Getters and Setters
 
 	public String getUsertype() {
@@ -32,4 +34,5 @@ public class Admin implements UserRepository{
 	public void setUsertype(String usertype) {
 		this.usertype = usertype;
 	}
+	
 }

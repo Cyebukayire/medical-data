@@ -18,15 +18,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.google.gson.Gson;
 import java.util.stream.Collectors;
 import javax.servlet.annotation.MultipartConfig;
 import org.json.JSONObject;
 
-@WebServlet("/signup")
+@WebServlet("/Signup")
  public class Signup extends HttpServlet {
     private static final long serialVersionUID = 1L; // Tomcat&JVM container use this ID to identify this bean
 	PrintWriter out;
+	LinkedHashMap<Integer, User> listedUsers;
     protected void processRequest(HttpServletRequest req, HttpServletResponse response)
             throws ServletException, IOException {
                 response.addHeader("Access-Control-Allow-Origin", "*");
@@ -39,7 +42,19 @@ import org.json.JSONObject;
                 Patient patient = new Patient();
                 Physician physician = new Physician();
                 Pharmacist pharmacist = new Pharmacist();
-                LinkedHashMap<Integer, User> lhmUsers = new LinkedHashMap<Integer, User>();
+//                LinkedHashMap<Integer, User> listedUsers = new LinkedHashMap<Integer, User>();
+                HttpSession session = req.getSession(); 
+//                session.setAttribute("name", 1);
+//                int num = (int) session.getAttribute("name");
+//                session.setAttribute("users", listedUsers);
+                
+                
+
+                if(session.getAttribute("users") != null){
+                listedUsers = (LinkedHashMap<Integer, User>) session.getAttribute("users");
+                }else{
+                listedUsers = new LinkedHashMap<Integer, User>();
+                }
                 
                 String jsonString = req.getReader().lines().collect(Collectors.joining());                         
             
@@ -50,16 +65,17 @@ import org.json.JSONObject;
 
                if(myObject.getUsertype().equalsIgnoreCase("admin")){
                     if(Password.getPassword().adminPassword(String.valueOf(myObject.getPassword())) == true){
-                        lhmUsers = admin.signup(myObject);
-                        successMessage = "Admin account is created successfully";
+                    	listedUsers = admin.signup(myObject);
+                    	session.setAttribute("users", listedUsers);
+                    	successMessage = "Admin account is created successfully";
                     } else {
                         successMessage="Password should be 8 numbers";
                                          
                     }
              } else if(myObject.getUsertype().equalsIgnoreCase("Patient")){
-                 System.out.println("Patient account..");
                  if(Password.getPassword().patientPassword(String.valueOf(myObject.getPassword())) == true){
-                  lhmUsers = patient.signup(myObject);  
+                  listedUsers = patient.signup(myObject);
+                  session.setAttribute("users", listedUsers);
                    successMessage = "Patient account is created successfully";
                  } else {                             
                       successMessage = "Password should be only 7 numbers";
@@ -68,7 +84,8 @@ import org.json.JSONObject;
              }else if(myObject.getUsertype().equalsIgnoreCase("Physician")){
              
                  if(Password.getPassword().physicianPassword(String.valueOf(myObject.getPassword())) == true){
-                  lhmUsers = physician.signup(myObject);  
+                	 listedUsers = physician.signup(myObject);
+                	 session.setAttribute("users", listedUsers);
                     successMessage = "Physician account is created successfully";
                  }else {                             
                      successMessage =  "Password should be only 6 numbers";   
@@ -77,7 +94,8 @@ import org.json.JSONObject;
              }else if(myObject.getUsertype().equalsIgnoreCase("pharmacist")){
                  
                  if(Password.getPassword().pharmacistPassword(String.valueOf(myObject.getPassword())) == true){
-                  lhmUsers = pharmacist.signup(myObject);  
+                  listedUsers = pharmacist.signup(myObject); 
+                  session.setAttribute("users", listedUsers);
                    successMessage = "Pharmacist account is successfully";
                  }else {                           
                      successMessage = "Password should be only 5 numbers";

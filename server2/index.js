@@ -1,21 +1,18 @@
-// check authorized user
-import express from 'express';
-import cors from 'cors';
-import env from "dotenv";
-import bodyParser from 'body-parser';
-import { isUserAuthenicated } from './middleware';
-import { medicalData } from './controller';
+const express = require('express')
+const cors = require('cors')
+const env = require('dotenv')
+const bodyParser = ('body-parser')
+const { isUserAuthenicated } = require('./middleware')
+const { Data } = require('./controller')
 
 env.config();
 const app = express();
-const port = 9000;
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+const port = 8050;
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(cors())
 
-app.post('/api/v1/getinfo', isUserAuthenicated, medicalData)
-app.get('/testDocker', (req, res)=> res.send("<h1>Docker is working...</h1>"))
-
+app.post('/api/v1/data', isUserAuthenicated, Data)
 app.listen(port, () => console.log(`App is started ${port}`));
 
-export default app;
+module.exports = app;

@@ -1,16 +1,11 @@
-
-const excelToJson = require('convert-excel-to-json');
-import fs from 'fs'
-import path from 'path'
+const fs = require('fs')
+const path = require('path')
  
-/**
- * @param {string} file name
- * @return {Array} converted data into array
- */
-export const medicalInfo = () => excelToJson({
-    source: fs.readFileSync(path.join(__dirname, 'MedicalData.xlsx')) 
+const excelToJson = require('convert-excel-to-json');
+const data = () => excelToJson({
+    source: fs.readFileSync(path.join(__dirname, '../data/MedicalData.xlsx')) 
 });
 
-
+module.exports.data = data;
 
 

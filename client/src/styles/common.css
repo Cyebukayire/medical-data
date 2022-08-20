@@ -1,4 +1,11 @@
 /* Form */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .container {
     display: flex;
     justify-content: space-around;
@@ -94,6 +101,9 @@
     color: black;
     margin-top: 6%;
   }
+  .check {
+    color: black;
+  }
   .container .form-container button{
       width: 100%;
       padding: 10px;
@@ -126,4 +136,47 @@
     border-radius: 5px;
 }
 
-/* Login Form */
+/*  Table Styles */
+
+.data-container {
+  font-family: "Inter", sans-serif;
+  color: #343a40;
+  line-height: 1;
+  width: 100%;
+
+}
+
+table {
+  width: 100%;
+  margin-top: 10%;
+  /* border: 1px solid #343a40; */
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th,
+td {
+  /* padding: 5% 15%; */
+  padding: 5%;
+  text-align: center;
+}
+
+thead th {
+  background-color: #dab63ec7;
+  color: #fff;
+  width: 25%;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f3c42833;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f3c42800;
+}
+
+caption {
+  font-weight: bolder;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
