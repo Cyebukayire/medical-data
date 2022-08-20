@@ -36,19 +36,4 @@ public class Password {
         
     }
     
-    
-    public boolean isNumber(int password){
-        boolean answer = false;
-        try 
-		{ 
-			answer= true;
-		}  
-		catch (NumberFormatException e)  
-		{ 
-			System.out.println(password + " is not a valid integer"); 
-                        answer = false;
-		} 
-	return answer;
-    }
-    
 }

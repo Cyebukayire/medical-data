@@ -3,7 +3,7 @@ import { SERVER1_API_URL } from "../../config";
 
 export const login = async (data) => {
   return await axios
-    .post(`${SERVER1_API_URL}/Authenticate`, data, {
+    .post(`${SERVER1_API_URL}/Signin`, data, {
       headers: {
         "Content-Type": "text/plain",
       },

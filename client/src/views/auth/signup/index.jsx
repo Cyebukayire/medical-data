@@ -184,7 +184,7 @@ const SignUp = () => {
             <option>Admin</option>
             <option>Patient</option>
             <option>Physician</option>
-            <option>Pharmacists</option>
+            <option>Pharmacist</option>
           </select>
           {touched.usertype && errors.usertype && (
             <label>{errors.usertype}</label>

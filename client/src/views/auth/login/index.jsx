@@ -31,11 +31,10 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setRequestError(false);
-    const usertype = await login(values);
-    // const response = "successfully"; 
-    if (response.includes("successfully")) {
-      usertype = usertype;
-      usertype.toLowerCase();
+    const response = await login(values);
+    let usertype = response.data.toLowerCase();
+    console.log(usertype);
+    if (usertype == "admin" || usertype=="patient" || usertype=="physician" || usertype=="pharmacist") {
       localStorage.setItem("usertype", usertype);
       toast.success(response);
       navigate("/data");
