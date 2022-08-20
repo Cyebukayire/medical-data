@@ -3,8 +3,9 @@
  * User Model
  * */
 package model;
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable{
 private int id;
 private String username;
 private String password;

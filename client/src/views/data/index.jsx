@@ -21,14 +21,14 @@ const DataTable = () => {
     <>
       {items && (
         <div className="data">
-          {items && items.data.length ? (
+          {items && localStorage.getItem("usertype")=="admin" ? (
             Object.keys(items.data).map((key, index) => {
               return (
                 <DataItem key={index} data={items.data[key]} title={key} />
               );
             })
           ) : (
-            <DataItem data={items.data} title={items.title} />
+            <DataItem data={items?.data} title={items?.title} />
           )}
         </div>
       )}

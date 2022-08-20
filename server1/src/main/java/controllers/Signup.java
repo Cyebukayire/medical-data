@@ -65,7 +65,7 @@ import org.json.JSONObject;
 
                if(myObject.getUsertype().equalsIgnoreCase("admin")){
                     if(Password.getPassword().adminPassword(String.valueOf(myObject.getPassword())) == true){
-                    	listedUsers = admin.signup(myObject);
+                    	listedUsers = admin.signup(myObject, req);
                     	session.setAttribute("users", listedUsers);
                     	successMessage = "Admin account is created successfully";
                     } else {
@@ -74,7 +74,7 @@ import org.json.JSONObject;
                     }
              } else if(myObject.getUsertype().equalsIgnoreCase("Patient")){
                  if(Password.getPassword().patientPassword(String.valueOf(myObject.getPassword())) == true){
-                  listedUsers = patient.signup(myObject);
+                  listedUsers = patient.signup(myObject, req);
                   session.setAttribute("users", listedUsers);
                    successMessage = "Patient account is created successfully";
                  } else {                             
@@ -84,7 +84,7 @@ import org.json.JSONObject;
              }else if(myObject.getUsertype().equalsIgnoreCase("Physician")){
              
                  if(Password.getPassword().physicianPassword(String.valueOf(myObject.getPassword())) == true){
-                	 listedUsers = physician.signup(myObject);
+                	 listedUsers = physician.signup(myObject, req);
                 	 session.setAttribute("users", listedUsers);
                     successMessage = "Physician account is created successfully";
                  }else {                             
@@ -94,7 +94,7 @@ import org.json.JSONObject;
              }else if(myObject.getUsertype().equalsIgnoreCase("pharmacist")){
                  
                  if(Password.getPassword().pharmacistPassword(String.valueOf(myObject.getPassword())) == true){
-                  listedUsers = pharmacist.signup(myObject); 
+                  listedUsers = pharmacist.signup(myObject, req); 
                   session.setAttribute("users", listedUsers);
                    successMessage = "Pharmacist account is successfully";
                  }else {                           

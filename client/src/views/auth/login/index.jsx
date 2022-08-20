@@ -31,12 +31,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setRequestError(false);
-    // const response = await login(values);
-    const response = "successfully";
+    const usertype = await login(values);
+    // const response = "successfully"; 
     if (response.includes("successfully")) {
-      // usertype = response.usertype;
-      // usertype.toLowerCase();
-      localStorage.setItem("usertype", "admin");
+      usertype = usertype;
+      usertype.toLowerCase();
+      localStorage.setItem("usertype", usertype);
       toast.success(response);
       navigate("/data");
     } else {

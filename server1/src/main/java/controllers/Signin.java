@@ -2,8 +2,6 @@ package controllers;
 
 import com.google.gson.Gson;
 
-
-import db.Database;
 import model.User;
 import repository.UserRepository;
 import services.Admin;
@@ -16,6 +14,8 @@ import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,35 +34,37 @@ public class Signin extends HttpServlet {
     }
     
     @Override
-    // handle get requests
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-    
-    @Override
     // handle post requests
     protected void doPost(HttpServletRequest req, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(req, response);
 
-      //Allow access from all domains
+        //Allow access from all domains
         response.addHeader("Access-Control-Allow-Origin", "*"); 
         String rawdata = req.getReader().lines().collect(Collectors.joining());
         User jsondata = new Gson().fromJson(rawdata, User.class);
 
         LinkedHashMap<Integer, User> users = new LinkedHashMap<Integer, User>();
-        users = Database.getInstance().getData();
-
+        ServletContext context = req.getServletContext();
+        // if user not found
+        if(context.getAttribute("users") == null) { 
+        	System.out.println("CONTEXT IS NULL");
+        authResponse(response, null, false);
+        return;
+        }
+        users = (LinkedHashMap<Integer, User>) context.getAttribute("users");
+        System.out.println("USERS FOUND");
+        System.out.println(users);
+        
         boolean exists = false;
         User authUser = null;
         for (User user : usersList(users)) {
             if (user.getUsername().equals(jsondata.getUsername())
-                    && user.getPassword() == jsondata.getPassword()) {
+                    && user.getPassword().equals(jsondata.getPassword())) {
                 exists = true;
                 authUser = user;
                 handleLogin(user.getUsertype().toLowerCase(), user.getUsername(),
-                        String.valueOf(user.getPassword()));
+                        String.valueOf(user.getPassword()), req);
             }
         }
 
@@ -80,12 +82,12 @@ public class Signin extends HttpServlet {
         return usersList;
     }
 
-    private void authResponse(HttpServletResponse response, User authUser, boolean userFound) {
+    private void authResponse(HttpServletResponse response, User authUser, boolean exists) {
         PrintWriter out;
         try {
             out = response.getWriter();
-            if (userFound == false) {
-                out.print("Invalid credentials");
+            if (exists == false) {
+                out.print("password or username is wrong");
             } else {
                 out.print(authUser.getUsertype());
             }
@@ -96,22 +98,22 @@ public class Signin extends HttpServlet {
 
     }
 
-    private void handleLogin(String role, String username, String password) {
-        if (role.equals("admin")) {
+    private void handleLogin(String usertype, String username, String password, HttpServletRequest request) {
+        if (usertype.equals("admin")) {
             Admin admin = new Admin();
-            admin.login(username, password);
+            admin.login(username, password, request);
             
-        } else if (role.equals("patient")) {
+        } else if (usertype.equals("patient")) {
             Patient patient = new Patient();
-            patient.login(username, password);
+            patient.login(username, password, request);
 
-        } else if (role.equals("physician")) {
+        } else if (usertype.equals("physician")) {
             Physician physician = new Physician();
-            physician.login(username, password);
+            physician.login(username, password, request);
             
-        } else if (role.equals("pharmacist")) {
+        } else if (usertype.equals("pharmacist")) {
             Pharmacist pharmacist = new Pharmacist();
-            pharmacist.login(username, password);
+            pharmacist.login(username, password, request);
         }
     }
 }
