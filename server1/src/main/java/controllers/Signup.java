@@ -1,4 +1,6 @@
 package controllers;
+/*@author: Peace Cyebukayire
+ * created: 18th Aug 2022*/
 
 import com.google.gson.Gson;
 
@@ -33,7 +35,6 @@ import org.json.JSONObject;
     protected void processRequest(HttpServletRequest req, HttpServletResponse response)
             throws ServletException, IOException {
                 response.addHeader("Access-Control-Allow-Origin", "*");
-                //response.setContentType("application/json");
                  out = response.getWriter();
 
              try {
@@ -42,13 +43,7 @@ import org.json.JSONObject;
                 Patient patient = new Patient();
                 Physician physician = new Physician();
                 Pharmacist pharmacist = new Pharmacist();
-//                LinkedHashMap<Integer, User> listedUsers = new LinkedHashMap<Integer, User>();
                 HttpSession session = req.getSession(); 
-//                session.setAttribute("name", 1);
-//                int num = (int) session.getAttribute("name");
-//                session.setAttribute("users", listedUsers);
-                
-                
 
                 if(session.getAttribute("users") != null){
                 listedUsers = (LinkedHashMap<Integer, User>) session.getAttribute("users");

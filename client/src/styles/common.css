@@ -1,3 +1,5 @@
+/*@author: Peace Cyebukayire
+ * created: 18th Aug 2022*/
 /* Form */
 
 * {
@@ -10,6 +12,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    /* justify-content: center; */
   }
   
   .container .form-container{
@@ -34,10 +37,11 @@
      padding: 10px;
      border: 1px solid silver;
      border-radius: 2px;
-     margin-top: 2em;
      font-size: 16px;
   }
-
+  .container .form-container .checkbox{
+    margin-top: 2em;
+  }
   .container .form-container .names{
     display: flex;
     flex-direction: row;
@@ -45,14 +49,32 @@
     justify-content: space-between;
   }
 
-  .container .form-container .names input{
-    width: 46%;
+  .container .form-container .names .input-box{
+    width: 48%;
   }
+
+  /* icons */
+.input-box{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 1em 0;
+  border: 1px solid rgb(216, 209, 209);
+}
+iconify-icon{
+  width: 30px;
+  margin-right: 2px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+
 
   .container .form-container .gender{
     display: flex;
     flex-direction: row;
     width: 100%;
+    margin-bottom: 15px;
   }
 
   .container .form-container .gender .genderOption{
@@ -68,10 +90,10 @@
     margin-left: 5px;
   }
   .container .form-container .gender .genderOption .label1{
-    margin-top: 75%;
+    margin-top: 10%;
   }
   .container .form-container .gender .genderOption .label2{
-    margin-top: 56%;
+    margin-top: 10%;
   }
 
   .container .form-container select{
@@ -137,17 +159,21 @@
 }
 
 /*  Table Styles */
-
+.data{
+  margin: 80px 0;
+  margin-top: 50px;
+}
 .data-container {
   font-family: "Inter", sans-serif;
   color: #343a40;
   line-height: 1;
   width: 100%;
+  margin-bottom: 50px;
 
 }
 
 table {
-  width: 100%;
+  width: 300px;
   margin-top: 10%;
   /* border: 1px solid #343a40; */
   border-collapse: collapse;
@@ -179,4 +205,20 @@ caption {
   font-weight: bolder;
   font-size: 14px;
   margin-bottom: 25px;
+}
+
+/* NAVBAR */
+
+.navbar {
+  margin-top: 50px;
+  background-color: #dab63ec7;
+  border-radius: 50px 10px;
+  width: 40%;
+  padding: 3%;
+  text-align: center;
+  color: white;
+  font-weight: bolder;
+}
+.navbar:hover{
+  background-color: #f3c428be;
 }

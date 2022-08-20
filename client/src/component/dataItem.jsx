@@ -1,3 +1,6 @@
+/*@author: Peace Cyebukayire
+ * created: 19th Aug 2022*/
+
 import "../styles/common.css";
 export function DataItem({ data, title }) {
   console.log("data: ", data);

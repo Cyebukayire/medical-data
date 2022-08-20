@@ -1,3 +1,7 @@
+/*@author: Peace Cyebukayire
+ * created: 19th Aug 2022*/
+
+// Authenticate the user
 const isUserAuthenicated = (req, res, next) => {
   const usertype = req.body.usertype;
   if (
@@ -11,4 +15,5 @@ const isUserAuthenicated = (req, res, next) => {
     return res.send({ message: "Unauthorized" });
   }
 };
+
 module.exports.isUserAuthenicated = isUserAuthenicated;

@@ -1,3 +1,6 @@
+/*@author: Peace Cyebukayire
+ * created: 18th Aug 2022*/
+
 import axios from "axios";
 import { SERVER1_API_URL } from "../../config";
 

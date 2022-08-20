@@ -1,15 +1,13 @@
 package repository;
+/*@author: Peace Cyebukayire
+ * created: 19th Aug 2022*/
+
 
 import java.util.LinkedHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
 import model.User;
-
-/* Author: Peace Cyebukayire
- * Created @ 19 Aug 20
- * User Repository
- * */
 
 public abstract interface UserRepository {
 

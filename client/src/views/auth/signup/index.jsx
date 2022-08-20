@@ -1,3 +1,6 @@
+/*@author: Peace Cyebukayire
+ * created: 18th Aug 2022*/
+
 import "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../../styles/common.css";
@@ -47,11 +50,11 @@ const SignUp = () => {
   };
 
   const handleSubmit = async (e) => {
-    setRequestError(false)
+    setRequestError(false);
     e.preventDefault();
     const message = await register(values);
-    console.log(message)
-    if(message != null){
+    console.log(message);
+    if (message != null) {
       if (message.includes("successfully")) {
         toast.success("Account created successfully");
         navigate("/");
@@ -59,8 +62,8 @@ const SignUp = () => {
         toast.error(message);
         return setRequestError(message);
       }
-    }else{
-      console.log("Response is null")
+    } else {
+      console.log("Response is null");
     }
   };
 
@@ -75,76 +78,82 @@ const SignUp = () => {
           {requestError && <div className="error-message">{requestError}</div>}
           <h1>Responsive Registration Form</h1>
           {/* Username */}
-          <input
-            name="username"
-            type="text"
-            placeholder="Username"
-            {...getFieldProps("username")}
-            style={errors.username && touched.username ? errorInputStyle : {}}
-          />
+          <div className="input-box">
+            <iconify-icon className="icon" icon="bxs:user"></iconify-icon>
+            <input
+              name="username"
+              type="text"
+              placeholder="Username"
+              {...getFieldProps("username")}
+              style={errors.username && touched.username ? errorInputStyle : {}}
+            />
+          </div>
           {touched.username && errors.username && (
             <label>{errors.username}</label>
           )}
 
           {/* Password */}
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            {...getFieldProps("password")}
-            style={errors.password && touched.password ? errorInputStyle : {}}
-          />
+          <div className="input-box">
+            <iconify-icon className="icon" icon="bxs:user"></iconify-icon>
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              {...getFieldProps("password")}
+              style={errors.password && touched.password ? errorInputStyle : {}}
+            />
+          </div>
           {touched.password && errors.password && (
             <label>{errors.password}</label>
           )}
           <div className="names">
             {/* Names */}
-            <input
-              name="firstname"
-              type="text"
-              placeholder="First Name"
-              {...getFieldProps("firstname")}
-              style={
-                errors.firstname && touched.firstname ? errorInputStyle : {}
-              }
-            />
-            {touched.firstname && errors.firstname && (
-              <label>{errors.firstname}</label>
-            )}
+            <div className="input-box">
+              <iconify-icon className="icon" icon="bxs:user"></iconify-icon>
+              <input
+                name="firstname"
+                type="text"
+                placeholder="First Name"
+                {...getFieldProps("firstname")}
+                style={
+                  errors.firstname && touched.firstname ? errorInputStyle : {}
+                }
+              />
+            </div>
 
-            <input
-              name="lastname"
-              type="text"
-              placeholder="Last Name"
-              {...getFieldProps("lastname")}
-              style={errors.lastname && touched.lastname ? errorInputStyle : {}}
-            />
-            {touched.lastname && errors.lastname && (
-              <label>{errors.lastname}</label>
-            )}
+            <div className="input-box">
+              <iconify-icon className="icon" icon="bxs:user"></iconify-icon>
+              <input
+                name="lastname"
+                type="text"
+                placeholder="Last Name"
+                {...getFieldProps("lastname")}
+                style={
+                  errors.lastname && touched.lastname ? errorInputStyle : {}
+                }
+              />
+            </div>
           </div>
-          {/* Phone Number */}
-          <input
-            name="phone"
-            type="text"
-            placeholder="Phone Number"
-            {...getFieldProps("phone")}
-            style={errors.phone && touched.phone ? errorInputStyle : {}}
-          />
-          {touched.phone && errors.phone && <label>{errors.phone}</label>}
-
-          {/* Birth Day */}
-          <input
-            name="birthday"
-            type="date"
-            required
-            {...getFieldProps("birthday")}
-            style={errors.birthday && touched.birthday ? errorInputStyle : {}}
-          />
-          <br />
-          {touched.birthday && errors.birthday && (
-            <label>{errors.birthday}</label>
+          {touched.firstname && errors.firstname && (
+            <label>{errors.firstname}</label>
           )}
+          <br />
+          {touched.lastname && errors.lastname && (
+            <label>{errors.lastname}</label>
+          )}
+
+          {/* Phone Number */}
+          <div className="input-box">
+            <iconify-icon className="icon" icon="bxs:user"></iconify-icon>
+            <input
+              name="phone"
+              type="text"
+              placeholder="Phone Number"
+              {...getFieldProps("phone")}
+              style={errors.phone && touched.phone ? errorInputStyle : {}}
+            />
+          </div>
+          {touched.phone && errors.phone && <label>{errors.phone}</label>}
 
           {/* Gender */}
           <div className="gender">
@@ -175,6 +184,20 @@ const SignUp = () => {
               </label>
             </div>
           </div>
+
+          {/* Birth Day */}
+          <input
+            name="birthday"
+            type="date"
+            required
+            {...getFieldProps("birthday")}
+            style={errors.birthday && touched.birthday ? errorInputStyle : {}}
+          />
+          <br />
+          {touched.birthday && errors.birthday && (
+            <label>{errors.birthday}</label>
+          )}
+
           {/* usertypes */}
           <select
             {...getFieldProps("usertype")}
@@ -193,12 +216,25 @@ const SignUp = () => {
           {/* Conditions */}
           <div className="conditions">
             <div>
-              <input type="checkbox" onChange={handleAgreeToTerms} />
-              <label htmlFor="terms"> <span className="check">I agree with terms and conditions</span></label>
+              <input
+                className="checkbox"
+                type="checkbox"
+                onChange={handleAgreeToTerms}
+              />
+              <label htmlFor="terms">
+                {" "}
+                <span className="check">I agree with terms and conditions</span>
+              </label>
             </div>
             <div>
-              <input type="checkbox" id="newsletter" />
-              <label htmlFor="newsletter"> <span className="check"> I want to receive newsletter</span> </label>
+              <input className="checkbox" type="checkbox" id="newsletter" />
+              <label htmlFor="newsletter">
+                {" "}
+                <span className="check">
+                  {" "}
+                  I want to receive newsletter
+                </span>{" "}
+              </label>
             </div>
           </div>
 

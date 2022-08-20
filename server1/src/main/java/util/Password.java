@@ -1,4 +1,6 @@
 package util;
+/*@author: Peace Cyebukayire
+ * created: 19th Aug 2022*/
 
 public class Password {
 	private static final Password password = new Password();
