@@ -6,7 +6,7 @@ import { SERVER1_API_URL } from "../../config";
 
 export const login = async (data) => {
   return await axios
-    .post(`${SERVER1_API_URL}/Signin`, data, {
+    .post(`${SERVER1_API_URL}/signin`, data, {
       headers: {
         "Content-Type": "text/plain",
       },
@@ -19,7 +19,7 @@ export const login = async (data) => {
 
 export const register = async (data) => {
   return await axios
-    .post(`${SERVER1_API_URL}/Signup`, data, {
+    .post(`${SERVER1_API_URL}/signup`, data, {
       headers: { "Content-Type": "text/plain" },
     })
     .then((res) => {

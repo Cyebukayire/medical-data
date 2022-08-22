@@ -1,12 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
-  <display-name>sms</display-name>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="5.0">
+  <servlet>
+    <description></description>
+    <display-name>Signin</display-name>
+    <servlet-name>Signin</servlet-name>
+    <servlet-class>controllers.Signin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Signin</servlet-name>
+    <url-pattern>/signin</url-pattern>
+  </servlet-mapping>
+  <display-name>server</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
     <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Signup</display-name>
+    <servlet-name>Signup</servlet-name>
+    <servlet-class>controllers.Signup</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Signup</servlet-name>
+    <url-pattern>/signup</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Model</display-name>
+    <servlet-name>Model</servlet-name>
+    <servlet-class>model.Model</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Model</servlet-name>
+    <url-pattern>/Model</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>User</display-name>
+    <servlet-name>User</servlet-name>
+    <servlet-class>repository.User</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>User</servlet-name>
+    <url-pattern>/User</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Admin</display-name>
+    <servlet-name>Admin</servlet-name>
+    <servlet-class>services.Admin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Admin</servlet-name>
+    <url-pattern>/Admin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Patient</display-name>
+    <servlet-name>Patient</servlet-name>
+    <servlet-class>services.Patient</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Patient</servlet-name>
+    <url-pattern>/Patient</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Pharmacist</display-name>
+    <servlet-name>Pharmacist</servlet-name>
+    <servlet-class>services.Pharmacist</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Pharmacist</servlet-name>
+    <url-pattern>/Pharmacist</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Physician</display-name>
+    <servlet-name>Physician</servlet-name>
+    <servlet-class>services.Physician</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Physician</servlet-name> 
+    <url-pattern>/Physician</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Password</display-name>
+    <servlet-name>Password</servlet-name>
+    <servlet-class>util.Password</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Password</servlet-name>
+    <url-pattern>/Password</url-pattern>
+  </servlet-mapping>
 </web-app>

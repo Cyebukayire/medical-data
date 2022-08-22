@@ -5,7 +5,7 @@
 package model;
 import java.io.Serializable;
 
-public class User implements Serializable{
+public class Model implements Serializable{
 private int id;
 private String username;
 private String password;

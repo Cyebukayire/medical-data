@@ -8,7 +8,7 @@ import services.Admin;
 import services.Patient;
 import services.Pharmacist;
 import services.Physician;
-import model.User;
+import model.Model;
 import util.Password;
 
 import java.io.IOException;
@@ -27,11 +27,11 @@ import java.util.stream.Collectors;
 import javax.servlet.annotation.MultipartConfig;
 import org.json.JSONObject;
 
-@WebServlet("/Signup")
+//@WebServlet("/signup")
  public class Signup extends HttpServlet {
     private static final long serialVersionUID = 1L; // Tomcat&JVM container use this ID to identify this bean
 	PrintWriter out;
-	LinkedHashMap<Integer, User> listedUsers;
+	LinkedHashMap<Integer, Model> listedUsers;
     protected void processRequest(HttpServletRequest req, HttpServletResponse response)
             throws ServletException, IOException {
                 response.addHeader("Access-Control-Allow-Origin", "*");
@@ -46,14 +46,14 @@ import org.json.JSONObject;
                 HttpSession session = req.getSession(); 
 
                 if(session.getAttribute("users") != null){
-                listedUsers = (LinkedHashMap<Integer, User>) session.getAttribute("users");
+                listedUsers = (LinkedHashMap<Integer, Model>) session.getAttribute("users");
                 }else{
-                listedUsers = new LinkedHashMap<Integer, User>();
+                listedUsers = new LinkedHashMap<Integer, Model>();
                 }
                 
                 String jsonString = req.getReader().lines().collect(Collectors.joining());                         
             
-                User myObject = new Gson().fromJson(jsonString, User.class); 
+                Model myObject = new Gson().fromJson(jsonString, Model.class); 
 
                 String successMessage = null;               
                 

@@ -7,14 +7,14 @@ import java.util.LinkedHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import model.User;
+import model.Model;
 
-public abstract interface UserRepository {
+public abstract interface User {
 
 	public String usertype = "";
 	
 //	Signup method
-	public abstract LinkedHashMap<Integer, User> signup(User user, HttpServletRequest request);
+	public abstract LinkedHashMap<Integer, Model> signup(Model user, HttpServletRequest request);
 	
 //	Login method
 	public abstract String login(String username, String password, HttpServletRequest request);

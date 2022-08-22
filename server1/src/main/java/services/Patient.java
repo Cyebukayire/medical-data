@@ -9,11 +9,11 @@ import java.util.Random;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
-import model.User;
-import repository.UserRepository;
+import model.Model;
+import repository.User;
 
 // Patient
-public class Patient implements UserRepository{
+public class Patient implements User{
 
 
 	public String usertype = "";
@@ -22,21 +22,21 @@ public class Patient implements UserRepository{
     public String login(String username, String password, HttpServletRequest request){
 		ServletContext context = request.getServletContext();
 		if(context.getAttribute("users") == null) return null;
-		LinkedHashMap<Integer, User> users = (LinkedHashMap<Integer, User>) context.getAttribute("users");
-        for (User user : users.values()) {
+		LinkedHashMap<Integer, Model> users = (LinkedHashMap<Integer, Model>) context.getAttribute("users");
+        for (Model user : users.values()) {
         	if(user.getUsername() == username && user.getPassword() == password) return user.getUsertype();
         }
 		return null;
     }
 
     @Override
-    public LinkedHashMap<Integer, User> signup(User patient, HttpServletRequest request) {
+    public LinkedHashMap<Integer, Model> signup(Model patient, HttpServletRequest request) {
     	ServletContext context = request.getServletContext(); //servlet scope
-		LinkedHashMap<Integer, User> users = null;
+		LinkedHashMap<Integer, Model> users = null;
 		if(context.getAttribute("users") != null){
-		users = (LinkedHashMap<Integer, User>) context.getAttribute("users"); // first, typecasting current users to LinkedHashMap
+		users = (LinkedHashMap<Integer, Model>) context.getAttribute("users"); // first, typecasting current users to LinkedHashMap
 		}else{
-		users = new LinkedHashMap<Integer, User>();
+		users = new LinkedHashMap<Integer, Model>();
 		}
 		users.put(new Random().nextInt(18), patient);
 		context.setAttribute("users", users);

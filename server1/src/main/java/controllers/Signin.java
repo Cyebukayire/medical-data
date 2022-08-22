@@ -4,8 +4,8 @@ package controllers;
 
 import com.google.gson.Gson;
 
-import model.User;
-import repository.UserRepository;
+import model.Model;
+import repository.User;
 import services.Admin;
 import services.Patient;
 import services.Pharmacist;
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
-@WebServlet("/Signin")
+//@WebServlet("/signin")
 public class Signin extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -44,9 +44,9 @@ public class Signin extends HttpServlet {
         //Allow access from all domains
         response.addHeader("Access-Control-Allow-Origin", "*"); 
         String rawdata = req.getReader().lines().collect(Collectors.joining());
-        User jsondata = new Gson().fromJson(rawdata, User.class);
+        Model jsondata = new Gson().fromJson(rawdata, Model.class);
 
-        LinkedHashMap<Integer, User> users = new LinkedHashMap<Integer, User>();
+        LinkedHashMap<Integer, Model> users = new LinkedHashMap<Integer, Model>();
         ServletContext context = req.getServletContext();
         // if user not found
         if(context.getAttribute("users") == null) { 
@@ -54,13 +54,13 @@ public class Signin extends HttpServlet {
         authResponse(response, null, false);
         return;
         }
-        users = (LinkedHashMap<Integer, User>) context.getAttribute("users");
+        users = (LinkedHashMap<Integer, Model>) context.getAttribute("users");
         System.out.println("USERS FOUND");
         System.out.println(users);
         
         boolean exists = false;
-        User authUser = null;
-        for (User user : usersList(users)) {
+        Model authUser = null;
+        for (Model user : usersList(users)) {
             if (user.getUsername().equals(jsondata.getUsername())
                     && user.getPassword().equals(jsondata.getPassword())) {
                 exists = true;
@@ -74,17 +74,17 @@ public class Signin extends HttpServlet {
 
     }
 
-    private ArrayList<User> usersList(LinkedHashMap<Integer, User> mappedUsers) {
-        ArrayList<User> usersList = new ArrayList<>();
+    private ArrayList<Model> usersList(LinkedHashMap<Integer, Model> mappedUsers) {
+        ArrayList<Model> usersList = new ArrayList<>();
 
-        for (Map.Entry<Integer, User> entry : mappedUsers.entrySet()) {
-            User umData = entry.getValue();
+        for (Map.Entry<Integer, Model> entry : mappedUsers.entrySet()) {
+            Model umData = entry.getValue();
             usersList.add(umData);
         }
         return usersList;
     }
 
-    private void authResponse(HttpServletResponse response, User authUser, boolean exists) {
+    private void authResponse(HttpServletResponse response, Model authUser, boolean exists) {
         PrintWriter out;
         try {
             out = response.getWriter();

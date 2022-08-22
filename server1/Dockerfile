@@ -1,8 +1,9 @@
-FROM node:18-alpine
-WORKDIR /app
-COPY package.json .
-RUN npm install -g npm@8.13.2
-RUN npm install
-COPY . .
-EXPOSE 5000
-CMD ["npm", "start"]
+FROM tomcat:9.0
+
+RUN ["rm", "-fr", "/usr/local/tomcat/webapps/ROOT"]
+
+COPY mywebapp.war /usr/local/tomcat/webapps/myapp.war
+
+EXPOSE 8080
+
+CMD ["catalina.sh", "run"]
