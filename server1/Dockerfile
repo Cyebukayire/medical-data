@@ -1,4 +1,4 @@
-FROM tomcat:9.0
+FROM tomcat:9.0.48
 
 RUN ["rm", "-fr", "/usr/local/tomcat/webapps/ROOT"]
 

@@ -94,7 +94,7 @@ const SignUp = () => {
 
           {/* Password */}
           <div className="input-box">
-            <iconify-icon className="icon" icon="bxs:user"></iconify-icon>
+          <iconify-icon className="icon" icon="ic:baseline-lock"></iconify-icon>
             <input
               name="password"
               type="password"
@@ -144,7 +144,7 @@ const SignUp = () => {
 
           {/* Phone Number */}
           <div className="input-box">
-            <iconify-icon className="icon" icon="bxs:user"></iconify-icon>
+          <iconify-icon icon="ic:baseline-local-phone"></iconify-icon>
             <input
               name="phone"
               type="text"

@@ -9,6 +9,7 @@ import services.Patient;
 import services.Pharmacist;
 import services.Physician;
 import model.Model;
+import repository.User;
 import util.Password;
 
 import java.io.IOException;
@@ -27,22 +28,22 @@ import java.util.stream.Collectors;
 import javax.servlet.annotation.MultipartConfig;
 import org.json.JSONObject;
 
-//@WebServlet("/signup")
  public class Signup extends HttpServlet {
     private static final long serialVersionUID = 1L; // Tomcat&JVM container use this ID to identify this bean
 	PrintWriter out;
 	LinkedHashMap<Integer, Model> listedUsers;
-    protected void processRequest(HttpServletRequest req, HttpServletResponse response)
+    @SuppressWarnings("null")
+	protected void processRequest(HttpServletRequest req, HttpServletResponse response)
             throws ServletException, IOException {
                 response.addHeader("Access-Control-Allow-Origin", "*");
                  out = response.getWriter();
-
+                 User user = null;
              try {
       
-                Admin admin = new Admin();
-                Patient patient = new Patient();
-                Physician physician = new Physician();
-                Pharmacist pharmacist = new Pharmacist();
+//                Admin admin = new Admin();
+//                Patient patient = new Patient();
+//                Physician physician = new Physician();
+//                Pharmacist pharmacist = new Pharmacist();
                 HttpSession session = req.getSession(); 
 
                 if(session.getAttribute("users") != null){
@@ -59,8 +60,9 @@ import org.json.JSONObject;
                 
 
                if(myObject.getUsertype().equalsIgnoreCase("admin")){
+            	   user = new Admin();
                     if(Password.getPassword().adminPassword(String.valueOf(myObject.getPassword())) == true){
-                    	listedUsers = admin.signup(myObject, req);
+                    	listedUsers = user.signup(myObject, req);
                     	session.setAttribute("users", listedUsers);
                     	successMessage = "Admin account is created successfully";
                     } else {
@@ -69,7 +71,7 @@ import org.json.JSONObject;
                     }
              } else if(myObject.getUsertype().equalsIgnoreCase("Patient")){
                  if(Password.getPassword().patientPassword(String.valueOf(myObject.getPassword())) == true){
-                  listedUsers = patient.signup(myObject, req);
+                  listedUsers = user.signup(myObject, req);
                   session.setAttribute("users", listedUsers);
                    successMessage = "Patient account is created successfully";
                  } else {                             
@@ -79,7 +81,7 @@ import org.json.JSONObject;
              }else if(myObject.getUsertype().equalsIgnoreCase("Physician")){
              
                  if(Password.getPassword().physicianPassword(String.valueOf(myObject.getPassword())) == true){
-                	 listedUsers = physician.signup(myObject, req);
+                	 listedUsers = user.signup(myObject, req);
                 	 session.setAttribute("users", listedUsers);
                     successMessage = "Physician account is created successfully";
                  }else {                             
@@ -89,7 +91,7 @@ import org.json.JSONObject;
              }else if(myObject.getUsertype().equalsIgnoreCase("pharmacist")){
                  
                  if(Password.getPassword().pharmacistPassword(String.valueOf(myObject.getPassword())) == true){
-                  listedUsers = pharmacist.signup(myObject, req); 
+                  listedUsers = user.signup(myObject, req); 
                   session.setAttribute("users", listedUsers);
                    successMessage = "Pharmacist account is successfully";
                  }else {                           
